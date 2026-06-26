@@ -37,11 +37,11 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-          cache-dependency-path: touchpilot-site/package-lock.json
+          cache-dependency-path: touchpilot-site/package.json
 
       - name: Install dependencies
         working-directory: touchpilot-site
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Import skills data
         working-directory: touchpilot-site
