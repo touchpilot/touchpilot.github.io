@@ -8,9 +8,11 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: deploy
+  group: pages
   cancel-in-progress: true
 
 jobs:
@@ -51,49 +53,23 @@ jobs:
         working-directory: touchpilot-site
         run: npm run build
 
-      - name: Verify build output
-        working-directory: touchpilot-site
-        run: ls -la dist
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: touchpilot-site/dist
 
   deploy:
-    name: Deploy to Cloudflare Pages
+    name: Deploy to GitHub Pages
     needs: build
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout touchpilot-site
-        uses: actions/checkout@v4
-        with:
-          path: touchpilot-site
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: npm
-          cache-dependency-path: touchpilot-site/package-lock.json
-
-      - name: Install dependencies
-        working-directory: touchpilot-site
-        run: npm ci
-
-      - name: Import skills data
-        working-directory: touchpilot-site
-        env:
-          TOUCHPILOT_REPO_DIR: ${{ github.workspace }}/touchpilot
-        run: node scripts/import-skills.mjs
-
-      - name: Build
-        working-directory: touchpilot-site
-        run: npm run build
-
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: touchpilot-site
-          directory: touchpilot-site/dist
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
