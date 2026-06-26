@@ -1,0 +1,243 @@
+---
+import Base from "@layouts/Base.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import DownloadButton from "@components/DownloadButton.astro";
+import FeatureCard from "@components/FeatureCard.astro";
+
+const features = [
+  {
+    title: "Native Android tools",
+    description:
+      "Tap, type, scroll, swipe, navigate Settings, open apps — all through typed, permissioned tools that run on your device.",
+    iconPath: "M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM9 8h6M9 12h6M9 16h4",
+  },
+  {
+    title: "Readable skills",
+    description:
+      "Every capability lives in a plain Markdown file you can read, edit, and audit. No black boxes.",
+    iconPath: "M4 5h12a2 2 0 0 1 2 2v12l-4-4H6a2 2 0 0 1-2-2V5ZM4 5v14",
+  },
+  {
+    title: "Local-first",
+    description:
+      "A deterministic local router handles simple actions offline. No API key, no network, no telemetry by default.",
+    iconPath: "M12 3v9m0 0 3-3m-3 3-3-3M5 21h14M7 17h10v4H7Z",
+  },
+  {
+    title: "Risk-aware approvals",
+    description:
+      "Every medium- and high-risk action shows up in chat for your explicit approval before it runs.",
+    iconPath: "M12 3 4 6v6c0 4.4 3 8.4 8 9 5-.6 8-4.6 8-9V6l-8-3Z M9 12l2 2 4-4",
+  },
+];
+
+const terminalLines = [
+  { prompt: "›", text: "open wifi settings", color: "text-slate-200" },
+  { prompt: "·", text: "observing screen · system Settings is foreground", color: "text-slate-400" },
+  { prompt: "·", text: "tapping Wi-Fi & internet", color: "text-slate-400" },
+  { prompt: "·", text: "available networks: Home-5G · Coffee-Guest · Library", color: "text-slate-400" },
+  { prompt: "›", text: "connect to Home-5G", color: "text-slate-200" },
+  { prompt: "·", text: "Home-5G requires a password. Please type it on the device.", color: "text-amber-300" },
+];
+
+const RISK_PILL: Record<string, string> = {
+  low:    "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300",
+  medium: "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300",
+  high:   "bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300",
+};
+---
+<Base
+  title="TouchPilot"
+  description="Local-first Android AI agent runtime for safe, observable phone control. Open source, on-device, auditable."
+>
+  <Header slot="header" current="home" />
+  <Footer slot="footer" />
+
+  <!-- Hero -->
+  <section class="grid items-center gap-12 pb-16 pt-8 md:grid-cols-12 md:pb-24 md:pt-16">
+    <div class="md:col-span-7">
+      <p class="mb-3 inline-flex items-center gap-2 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-700 dark:bg-brand-950/40 dark:text-brand-300">
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-600"></span>
+        1.0 Release Candidate
+      </p>
+      <h1 class="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
+        A local-first AI agent
+        <br />
+        <span class="text-brand-700 dark:text-brand-300">for your Android phone.</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-lg text-slate-600 dark:text-slate-300">
+        TouchPilot turns your device into a host for an AI agent that you can see,
+        audit, and revoke. Every action is a typed, permissioned tool — every
+        sensitive step asks first.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <DownloadButton size="lg">
+          <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5" aria-hidden="true">
+            <path d="M12 4v12m0 0-5-5m5 5 5-5M5 20h14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Download APK
+        </DownloadButton>
+        <DownloadButton href="https://touchpilot.github.io/touchpilot-docs/" variant="secondary" size="lg">
+          Read the docs
+        </DownloadButton>
+      </div>
+      <p class="mt-4 text-xs text-slate-500 dark:text-slate-400">
+        Android 8.0+ · MIT licensed · No account, no telemetry by default
+      </p>
+    </div>
+
+    <!-- Demo placeholder -->
+    <div class="md:col-span-5">
+      <div class="relative">
+        <div class="absolute -inset-4 rounded-3xl bg-gradient-to-br from-brand-200/60 via-transparent to-brand-400/30 blur-2xl dark:from-brand-800/40 dark:to-brand-600/20" aria-hidden="true"></div>
+        <div class="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-soft dark:border-slate-800">
+          <div class="flex items-center gap-1.5 border-b border-slate-800 bg-slate-900/80 px-4 py-2.5">
+            <span class="h-2.5 w-2.5 rounded-full bg-rose-500/80"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-amber-500/80"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-emerald-500/80"></span>
+            <span class="ml-2 font-mono text-xs text-slate-400">touchpilot · chat</span>
+          </div>
+          <div class="space-y-2 p-4 font-mono text-sm">
+            {terminalLines.map((line) => (
+              <div class="flex gap-2">
+                <span class="select-none text-brand-400">{line.prompt}</span>
+                <span class:list={["whitespace-pre-wrap", line.color]}>{line.text}</span>
+              </div>
+            ))}
+            <div class="mt-3 flex items-center gap-2 border-t border-slate-800 pt-3 text-slate-500">
+              <span class="h-2 w-2 animate-pulse rounded-full bg-brand-400"></span>
+              <span>TouchPilot is typing…</span>
+            </div>
+          </div>
+        </div>
+        <p class="mt-3 text-center text-xs text-slate-500 dark:text-slate-400">
+          Demo placeholder · Replace with a screen recording GIF
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="border-t border-slate-200 py-16 dark:border-slate-800">
+    <div class="mb-10 max-w-2xl">
+      <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">Built like a pilot, not a hidden daemon.</h2>
+      <p class="mt-3 text-lg text-slate-600 dark:text-slate-300">
+        Visible when active, explicit about requested actions, narrow in
+        permissions, reversible where possible, and logged by default.
+      </p>
+    </div>
+    <div class="grid-cards">
+      {features.map((f) => (
+        <FeatureCard title={f.title} description={f.description} iconPath={f.iconPath} />
+      ))}
+    </div>
+  </section>
+
+  <!-- Safety strip -->
+  <section class="mt-16 rounded-3xl border border-slate-200 bg-slate-50 p-8 dark:border-slate-800 dark:bg-slate-900/50 sm:p-12">
+    <div class="grid items-center gap-8 md:grid-cols-2">
+      <div>
+        <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Safety is a property of the code, not a promise.</h2>
+        <p class="mt-3 text-slate-600 dark:text-slate-300">
+          Four layers of enforcement stand between an LLM and your phone:
+          skill allowlists, per-tool risk levels, a central policy module, and
+          argument redaction. See exactly what the agent sees and asks for.
+        </p>
+        <a
+          href="/safety/"
+          class="mt-6 inline-flex items-center gap-1 text-sm font-medium text-brand-700 hover:text-brand-800 dark:text-brand-300 dark:hover:text-brand-200"
+        >
+          Read the full safety model
+          <svg viewBox="0 0 24 24" fill="none" class="h-4 w-4" aria-hidden="true">
+            <path d="M5 12h14m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <ul class="space-y-3">
+        {[
+          { title: "Skill allowlists", body: "Skills declare the tools they may call. Anything else is blocked." },
+          { title: "Tool risk levels", body: "LOW runs silent. MEDIUM asks once per session. HIGH always asks." },
+          { title: "Central policy", body: "App-aware rules decide what needs approval, per skill + tool." },
+          { title: "Redaction", body: "Passwords, tokens, and PII are scrubbed before logs or approval copy." },
+        ].map((item) => (
+          <li class="flex gap-3">
+            <span class="mt-1 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-brand-100 text-brand-700 dark:bg-brand-950/60 dark:text-brand-300">
+              <svg viewBox="0 0 24 24" fill="none" class="h-3 w-3" aria-hidden="true">
+                <path d="m5 12 5 5L20 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div>
+              <p class="font-medium">{item.title}</p>
+              <p class="text-sm text-slate-600 dark:text-slate-400">{item.body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Skills teaser -->
+  <section class="mt-16 grid items-center gap-12 md:grid-cols-2">
+    <div>
+      <h2 class="text-3xl font-semibold tracking-tight">Skills you can read, edit, and audit.</h2>
+      <p class="mt-3 text-slate-600 dark:text-slate-300">
+        Every bundled capability is a small Markdown file with a YAML header
+        declaring its risk, allowed tools, and success criteria. The agent
+        reads the same files you do.
+      </p>
+      <a
+        href="/skills/"
+        class="mt-6 inline-flex items-center gap-1 text-sm font-medium text-brand-700 hover:text-brand-800 dark:text-brand-300 dark:hover:text-brand-200"
+      >
+        Browse all 10 bundled skills
+        <svg viewBox="0 0 24 24" fill="none" class="h-4 w-4" aria-hidden="true">
+          <path d="M5 12h14m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      {[
+        { title: "Browser", desc: "Open pages, search the web.", risk: "low" },
+        { title: "Settings", desc: "Navigate Android Settings.", risk: "medium" },
+        { title: "Messages", desc: "Draft SMS with approval.", risk: "high" },
+        { title: "Wi-Fi", desc: "Open Wi-Fi settings.", risk: "medium" },
+      ].map((s) => (
+        <article class="rounded-xl border border-slate-200 bg-white p-4 shadow-soft dark:border-slate-800 dark:bg-slate-900">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">{s.title}</h3>
+            <span class:list={["rounded-full px-2 py-0.5 text-xs font-medium", RISK_PILL[s.risk] ?? ""]}>
+              {s.risk}
+            </span>
+          </div>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">{s.desc}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="mt-20 rounded-3xl bg-brand-600 px-8 py-16 text-center shadow-soft sm:px-12">
+    <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+      Try TouchPilot on your phone.
+    </h2>
+    <p class="mx-auto mt-3 max-w-xl text-brand-100">
+      Sideload the APK, grant Accessibility, and start a chat. You'll see
+      every tool the agent runs and approve the ones that matter.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/install/"
+        class="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-base font-semibold text-brand-700 shadow-soft transition hover:bg-brand-50"
+      >
+        Install guide
+      </a>
+      <a
+        href="https://github.com/touchpilot/touchpilot"
+        class="inline-flex items-center gap-2 rounded-lg border border-brand-300 px-6 py-3 text-base font-semibold text-white transition hover:bg-brand-700"
+      >
+        View on GitHub
+      </a>
+    </div>
+  </section>
+</Base>

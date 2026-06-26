@@ -1,0 +1,21 @@
+---
+export interface Props {
+  href?: string;
+  variant?: "primary" | "secondary";
+  size?: "md" | "lg";
+}
+const {
+  href = "/install/",
+  variant = "primary",
+  size = "md",
+} = Astro.props;
+
+const base = "inline-flex items-center justify-center gap-2 rounded-lg font-semibold shadow-soft transition";
+const sizing = size === "lg" ? "px-6 py-3 text-base" : "px-4 py-2 text-sm";
+const colors = variant === "primary"
+  ? "bg-brand-600 text-white hover:bg-brand-700"
+  : "border border-slate-300 text-slate-800 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-900";
+---
+<a href={href} class:list={[base, sizing, colors]}>
+  <slot />
+</a>

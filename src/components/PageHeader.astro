@@ -1,0 +1,21 @@
+---
+export interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  align?: "left" | "center";
+}
+const { eyebrow, title, subtitle, align = "left" } = Astro.props;
+const alignClass = align === "center" ? "mx-auto text-center" : "";
+---
+<header class:list={["mb-10 max-w-3xl", alignClass]}>
+  {eyebrow && (
+    <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-700 dark:text-brand-300">
+      {eyebrow}
+    </p>
+  )}
+  <h1 class="text-4xl font-semibold tracking-tight sm:text-5xl">{title}</h1>
+  {subtitle && (
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">{subtitle}</p>
+  )}
+</header>

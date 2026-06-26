@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    font-feature-settings: "cv11", "ss01", "ss03";
+  }
+  ::selection {
+    background: theme("colors.brand.200");
+    color: theme("colors.brand.900");
+  }
+  .dark ::selection {
+    background: theme("colors.brand.700");
+    color: white;
+  }
+}
+
+@layer components {
+  .container-prose {
+    @apply mx-auto w-full max-w-3xl;
+  }
+  .grid-cards {
+    @apply grid gap-6 sm:grid-cols-2;
+  }
+  .grid-cards-3 {
+    @apply grid gap-6 md:grid-cols-3;
+  }
+}

@@ -1,0 +1,65 @@
+---
+import Base from "@layouts/Base.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import PageHeader from "@components/PageHeader.astro";
+import FeatureCard from "@components/FeatureCard.astro";
+
+const pillars = [
+  {
+    title: "Native Android tools",
+    description:
+      "Tap, type, scroll, swipe, navigate Settings panels, wait for UI to settle — every interaction is a typed tool the agent can call. No screen scraping, no overlay hacks.",
+    iconPath: "M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM9 8h6M9 12h6M9 16h4",
+  },
+  {
+    title: "Real screen context",
+    description:
+      "The agent reads on-screen text and accessibility metadata through Android's AccessibilityService. It sees what you see, including app names, fields, and buttons.",
+    iconPath: "M3 5h18v10H3zM8 19h8M12 15v4",
+  },
+  {
+    title: "Editable skills",
+    description:
+      "Each capability is a Markdown file with a YAML header: id, title, description, risk, allowed tools, success criteria, and example phrases. Read, edit, version-control.",
+    iconPath: "M4 5h12a2 2 0 0 1 2 2v12l-4-4H6a2 2 0 0 1-2-2V5ZM4 5v14",
+  },
+  {
+    title: "Local-first routing",
+    description:
+      "A deterministic local router handles simple actions with no network or API key. Optional LiteRT-backed on-device model for richer command routing.",
+    iconPath: "M12 3v9m0 0 3-3m-3 3-3-3M5 21h14M7 17h10v4H7Z",
+  },
+  {
+    title: "Risk-aware approvals",
+    description:
+      "Every medium- and high-risk tool surfaces a confirmation card in chat before it runs. Low-risk observation runs silent. The user is always the last word.",
+    iconPath: "M12 3 4 6v6c0 4.4 3 8.4 8 9 5-.6 8-4.6 8-9V6l-8-3Z M9 12l2 2 4-4",
+  },
+  {
+    title: "Full audit log",
+    description:
+      "Every model decision and every tool execution is persisted locally and exportable. Sensitive arguments are redacted before they hit disk.",
+    iconPath: "M5 4h11l3 3v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1ZM8 12h8M8 16h5",
+  },
+];
+---
+<Base
+  title="Features"
+  description="Native Android tools, editable skills, local-first routing, risk-aware approvals, and a full audit log. Here's what TouchPilot does."
+>
+  <Header slot="header" current="features" />
+  <Footer slot="footer" />
+
+  <PageHeader
+    eyebrow="Features"
+    title="Everything in one auditable runtime."
+    subtitle="Six pillars, each enforced in code, each readable on this page."
+  />
+
+  <div class="grid-cards">
+    {pillars.map((p) => (
+      <FeatureCard title={p.title} description={p.description} iconPath={p.iconPath} />
+    ))}
+  </div>
+</Base>

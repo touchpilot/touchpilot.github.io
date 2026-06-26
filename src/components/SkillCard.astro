@@ -1,0 +1,39 @@
+---
+import RiskBadge from "./RiskBadge.astro";
+
+export interface Props {
+  skill: {
+    id: string;
+    title: string;
+    description: string;
+    risk: string;
+    aliases: string[];
+    examples: string[];
+  };
+}
+const { skill } = Astro.props;
+const firstExample = skill.examples[0];
+---
+<article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft transition hover:border-brand-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-700">
+  <div class="flex items-start justify-between gap-4">
+    <h3 class="text-lg font-semibold">{skill.title}</h3>
+    <RiskBadge risk={skill.risk} />
+  </div>
+  <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{skill.description}</p>
+
+  {firstExample && (
+    <p class="mt-4 rounded-md bg-slate-50 px-3 py-2 font-mono text-xs text-slate-700 dark:bg-slate-950/60 dark:text-slate-300">
+      <span class="select-none text-slate-400">› </span>{firstExample}
+    </p>
+  )}
+
+  {skill.aliases.length > 0 && (
+    <ul class="mt-4 flex flex-wrap gap-1.5">
+      {skill.aliases.slice(0, 4).map((alias) => (
+        <li class="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+          {alias}
+        </li>
+      ))}
+    </ul>
+  )}
+</article>

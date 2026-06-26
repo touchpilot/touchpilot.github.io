@@ -1,0 +1,99 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout touchpilot-site
+        uses: actions/checkout@v4
+        with:
+          path: touchpilot-site
+
+      - name: Checkout touchpilot product repo
+        uses: actions/checkout@v4
+        with:
+          repository: touchpilot/touchpilot
+          ref: main
+          path: touchpilot
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: touchpilot-site/package-lock.json
+
+      - name: Install dependencies
+        working-directory: touchpilot-site
+        run: npm ci
+
+      - name: Import skills data
+        working-directory: touchpilot-site
+        env:
+          TOUCHPILOT_REPO_DIR: ${{ github.workspace }}/touchpilot
+        run: node scripts/import-skills.mjs
+
+      - name: Build
+        working-directory: touchpilot-site
+        run: npm run build
+
+      - name: Verify build output
+        working-directory: touchpilot-site
+        run: ls -la dist
+
+  deploy:
+    name: Deploy to Cloudflare Pages
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout touchpilot-site
+        uses: actions/checkout@v4
+        with:
+          path: touchpilot-site
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: touchpilot-site/package-lock.json
+
+      - name: Install dependencies
+        working-directory: touchpilot-site
+        run: npm ci
+
+      - name: Import skills data
+        working-directory: touchpilot-site
+        env:
+          TOUCHPILOT_REPO_DIR: ${{ github.workspace }}/touchpilot
+        run: node scripts/import-skills.mjs
+
+      - name: Build
+        working-directory: touchpilot-site
+        run: npm run build
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: touchpilot-site
+          directory: touchpilot-site/dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
