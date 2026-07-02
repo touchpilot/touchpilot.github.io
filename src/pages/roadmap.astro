@@ -3,52 +3,6 @@ import Base from "@layouts/Base.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import PageHeader from "@components/PageHeader.astro";
-
-const STATUS_DOT: Record<string, string> = {
-  done: "bg-emerald-500 text-white",
-  now: "bg-brand-600 text-white",
-  next: "bg-amber-500 text-white",
-  then: "bg-slate-300 text-slate-700 dark:bg-slate-700 dark:text-slate-200",
-};
-
-const milestones = [
-  {
-    label: "Done",
-    title: "Local-first Android agent foundation",
-    body: "Chat UI, screen context, tool execution, audit log, AccessibilityService-based control.",
-    status: "done",
-  },
-  {
-    label: "Done",
-    title: "Hybrid local AI core",
-    body: "Deterministic local router, LiteRT-backed on-device model, OpenAI-compatible cloud fallback (opt-in).",
-    status: "done",
-  },
-  {
-    label: "Done",
-    title: "Skills v2 registry",
-    body: "Bundled skills for browser, settings, messages, Wi-Fi, volume, launcher, clipboard, and share. Skill-aware prompts, allowlists, risk-aware approval copy.",
-    status: "done",
-  },
-  {
-    label: "Now",
-    title: "1.0 release",
-    body: "Signed APK, public documentation, skill authoring guide, safety model, test and live validation matrix, changelog, release process.",
-    status: "now",
-  },
-  {
-    label: "Next",
-    title: "Safety & policy v2",
-    body: "Sensitive workflow classification, central policy decisions, app-aware rules, expanded redaction.",
-    status: "next",
-  },
-  {
-    label: "Then",
-    title: "Post-1.0 platform",
-    body: "Stable host for skills and workflows. Frozen tool, skill, workflow, memory, and policy contracts. Host-oriented documentation set.",
-    status: "then",
-  },
-];
 ---
 <Base
   title="Roadmap"
@@ -63,31 +17,38 @@ const milestones = [
     subtitle="TouchPilot ships in the open. Milestones below are the canonical plan; pull requests and bug reports may reorder them."
   />
 
-<ol class="relative space-y-8 border-l border-slate-200 pl-6 dark:border-slate-800">
-    {milestones.map((m) => (
+  <ol class="relative space-y-8 border-l border-border pl-6">
+    {[
+      { label: "Done", title: "Local-first Android agent foundation", body: "Chat UI, screen context, tool execution, audit log, AccessibilityService-based control.", status: "done" },
+      { label: "Done", title: "Hybrid local AI core", body: "Deterministic local router, LiteRT-backed on-device model, OpenAI-compatible cloud fallback (opt-in).", status: "done" },
+      { label: "Done", title: "Skills v2 registry", body: "Bundled skills for browser, settings, messages, Wi-Fi, volume, launcher, clipboard, and share.", status: "done" },
+      { label: "Now", title: "1.0 release", body: "Signed APK, public documentation, skill authoring guide, safety model, release process.", status: "now" },
+      { label: "Next", title: "Safety & policy v2", body: "Sensitive workflow classification, central policy decisions, app-aware rules, expanded redaction.", status: "next" },
+      { label: "Then", title: "Post-1.0 platform", body: "Stable host for skills and workflows. Frozen tool, skill, workflow, memory, and policy contracts.", status: "then" },
+    ].map((m) => (
       <li class="relative">
-        <span class:list={["absolute -left-[33px] inline-flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-950", STATUS_DOT[m.status] ?? ""]}>
+        <span class:list={["absolute -left-[33px] inline-flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-background text-white", m.status === "done" ? "bg-brand-600" : m.status === "now" ? "bg-brand-600" : m.status === "next" ? "bg-amber-500" : "bg-muted-foreground"]}>
           <svg viewBox="0 0 24 24" fill="none" class="h-3 w-3" aria-hidden="true">
             <path d="m5 12 5 5L20 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
         <div class="flex flex-col gap-1">
-          <p class="text-xs font-semibold uppercase tracking-wider text-brand-700 dark:text-brand-300">{m.label}</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-primary">{m.label}</p>
           <h3 class="text-lg font-semibold">{m.title}</h3>
-          <p class="text-sm text-slate-600 dark:text-slate-300">{m.body}</p>
+          <p class="text-sm text-muted-foreground">{m.body}</p>
         </div>
       </li>
     ))}
   </ol>
 
-  <div class="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-900/50">
+  <div class="mt-12 rounded-lg border bg-muted/50 p-6">
     <h3 class="text-base font-semibold">Want the granular plan?</h3>
-    <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
+    <p class="mt-2 text-sm text-muted-foreground">
       The full roadmap lives in the docs and is updated alongside every release.
     </p>
     <a
       href="https://touchpilot.github.io/touchpilot-docs/roadmap/"
-      class="mt-3 inline-flex items-center gap-1 text-sm font-medium text-brand-700 hover:text-brand-800 dark:text-brand-300 dark:hover:text-brand-200"
+      class="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary transition-all hover:border-b-2 hover:border-primary"
     >
       Read the roadmap docs →
     </a>

@@ -3,46 +3,6 @@ import Base from "@layouts/Base.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import PageHeader from "@components/PageHeader.astro";
-
-const layers = [
-  {
-    n: "01",
-    title: "Skill allowlists",
-    body: "Every bundled skill declares the set of tools it may call. If a tool is not in the active skill's allowed_tools list, the agent loop rejects the call with a POLICY_BLOCKED event before it is executed.",
-  },
-  {
-    n: "02",
-    title: "Tool risk levels",
-    body: "LOW tools (observation, wait, foreground-app detection) run without prompting. MEDIUM tools (open_app, tap, type_text, scroll, swipe) prompt for approval on first use per session. HIGH tools always prompt.",
-  },
-  {
-    n: "03",
-    title: "Central policy decisions",
-    body: "A small ActionPolicy module evaluates every tool call and returns Allow, RequireApproval, or Deny. Decisions factor in the tool's risk, the active skill, the target app, and a list of app-aware rules.",
-  },
-  {
-    n: "04",
-    title: "Argument redaction",
-    body: "Sensitive argument values are scrubbed before they are written to logs or shown in approval copy. The redactor covers common PII patterns and named keys (password, secret, token, api_key, private_key, credential, auth, otp, pin).",
-  },
-];
-
-const granted = [
-  { name: "BIND_ACCESSIBILITY_SERVICE", reason: "The agent's primary observation and control surface." },
-  { name: "FOREGROUND_SERVICE", reason: "Posts a persistent notification while the agent is running." },
-  { name: "POST_NOTIFICATIONS", reason: "Required on Android 13+ to surface the foreground service notification." },
-  { name: "INTERNET", reason: "Optional. Only used if you configure an OpenAI-compatible cloud fallback." },
-  { name: "QUERY_ALL_PACKAGES", reason: "Lets open_app resolve a friendly app name to a package without typing the package id." },
-];
-
-const denied = [
-  "READ_SMS · RECEIVE_SMS · SEND_SMS",
-  "READ_CONTACTS",
-  "READ_EXTERNAL_STORAGE · WRITE_EXTERNAL_STORAGE",
-  "CAMERA · RECORD_AUDIO",
-  "READ_PHONE_STATE",
-  "SYSTEM_ALERT_WINDOW",
-];
 ---
 <Base
   title="Safety"
@@ -58,30 +18,41 @@ const denied = [
   />
 
   <section class="grid gap-6 sm:grid-cols-2">
-    {layers.map((l) => (
-      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-900">
-        <p class="font-mono text-xs text-brand-700 dark:text-brand-300">Layer {l.n}</p>
+    {[
+      { n: "01", title: "Skill allowlists", body: "Every bundled skill declares the set of tools it may call. If a tool is not in the active skill's allowed_tools list, the agent loop rejects the call with a POLICY_BLOCKED event before it is executed." },
+      { n: "02", title: "Tool risk levels", body: "LOW tools (observation, wait, foreground-app detection) run without prompting. MEDIUM tools (open_app, tap, type_text, scroll, swipe) prompt for approval on first use per session. HIGH tools always prompt." },
+      { n: "03", title: "Central policy decisions", body: "A small ActionPolicy module evaluates every tool call and returns Allow, RequireApproval, or Deny. Decisions factor in the tool's risk, the active skill, the target app, and a list of app-aware rules." },
+      { n: "04", title: "Argument redaction", body: "Sensitive argument values are scrubbed before they are written to logs or shown in approval copy. The redactor covers common PII patterns and named keys (password, secret, token, api_key, private_key, credential, auth, otp, pin)." },
+    ].map((l) => (
+      <article class="rounded-lg border bg-card p-6 shadow-sm transition-all hover:shadow-lg">
+        <p class="font-mono text-xs text-primary">Layer {l.n}</p>
         <h3 class="mt-2 text-lg font-semibold">{l.title}</h3>
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">{l.body}</p>
+        <p class="mt-2 text-sm text-muted-foreground">{l.body}</p>
       </article>
     ))}
   </section>
 
   <section class="mt-16">
     <h2 class="text-2xl font-semibold tracking-tight">What TouchPilot requests from your device</h2>
-    <div class="mt-6 overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
+    <div class="mt-6 overflow-hidden rounded-lg border">
       <table class="w-full text-left text-sm">
-        <thead class="bg-slate-50 text-slate-600 dark:bg-slate-900 dark:text-slate-300">
+        <thead class="bg-muted/50 text-muted-foreground">
           <tr>
             <th class="px-4 py-3 font-medium">Permission</th>
             <th class="px-4 py-3 font-medium">Why</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
-          {granted.map((p) => (
+        <tbody class="divide-y divide-border">
+          {[
+            { name: "BIND_ACCESSIBILITY_SERVICE", reason: "The agent's primary observation and control surface." },
+            { name: "FOREGROUND_SERVICE", reason: "Posts a persistent notification while the agent is running." },
+            { name: "POST_NOTIFICATIONS", reason: "Required on Android 13+ to surface the foreground service notification." },
+            { name: "INTERNET", reason: "Optional. Only used if you configure an OpenAI-compatible cloud fallback." },
+            { name: "QUERY_ALL_PACKAGES", reason: "Lets open_app resolve a friendly app name to a package without typing the package id." },
+          ].map((p) => (
             <tr>
-              <td class="px-4 py-3 font-mono text-xs text-slate-800 dark:text-slate-200">{p.name}</td>
-              <td class="px-4 py-3 text-slate-600 dark:text-slate-300">{p.reason}</td>
+              <td class="px-4 py-3 font-mono text-xs">{p.name}</td>
+              <td class="px-4 py-3 text-muted-foreground">{p.reason}</td>
             </tr>
           ))}
         </tbody>
@@ -91,27 +62,34 @@ const denied = [
 
   <section class="mt-16">
     <h2 class="text-2xl font-semibold tracking-tight">What TouchPilot does <em>not</em> request</h2>
-    <p class="mt-2 text-slate-600 dark:text-slate-300">
+    <p class="mt-2 text-muted-foreground">
       No message interception. No contact scraping. No file access outside its
       own sandbox. No microphone or camera. No call log. No overlay drawing.
     </p>
     <ul class="mt-4 grid gap-2 sm:grid-cols-2">
-      {denied.map((d) => (
-        <li class="rounded-md bg-slate-100 px-3 py-2 font-mono text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-300">{d}</li>
+      {[
+        "READ_SMS · RECEIVE_SMS · SEND_SMS",
+        "READ_CONTACTS",
+        "READ_EXTERNAL_STORAGE · WRITE_EXTERNAL_STORAGE",
+        "CAMERA · RECORD_AUDIO",
+        "READ_PHONE_STATE",
+        "SYSTEM_ALERT_WINDOW",
+      ].map((d) => (
+        <li class="rounded-md bg-muted px-3 py-2 font-mono text-xs">{d}</li>
       ))}
     </ul>
   </section>
 
-  <section class="mt-16 rounded-2xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-900/50">
+  <section class="mt-16 rounded-lg border bg-muted/50 p-6">
     <h2 class="text-xl font-semibold">Report a safety issue</h2>
-    <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
+    <p class="mt-2 text-sm text-muted-foreground">
       Found a bypass — a missing redaction, a missing approval prompt, a
       privilege escalation? Please report it privately to the maintainers
       rather than opening a public issue.
     </p>
     <a
       href="https://github.com/touchpilot/touchpilot/security/advisories/new"
-      class="mt-4 inline-flex items-center gap-2 rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
+      class="mt-4 inline-flex items-center gap-2 rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:bg-foreground/90"
     >
       File a private advisory →
     </a>

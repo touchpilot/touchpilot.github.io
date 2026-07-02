@@ -1,0 +1,17 @@
+---
+export interface Props {
+  class?: string;
+  href?: string;
+}
+const { class: className = "", href } = Astro.props;
+const cls = ["rounded-lg border bg-card text-card-foreground shadow-sm", className].filter(Boolean).join(" ");
+---
+{href ? (
+  <a href={href} class={cls}>
+    <slot />
+  </a>
+) : (
+  <div class={cls}>
+    <slot />
+  </div>
+)}

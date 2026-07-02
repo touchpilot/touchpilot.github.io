@@ -4,6 +4,7 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import PageHeader from "@components/PageHeader.astro";
 import SkillCard from "@components/SkillCard.astro";
+import Badge from "@components/ui/Badge.astro";
 import skills from "../data/skills.json";
 
 const total = skills.count;
@@ -13,7 +14,7 @@ const counts = skills.skills.reduce<Record<string, number>>((acc, s) => {
 }, {});
 
 const RISK_PILL: Record<string, string> = {
-  low:    "bg-emerald-50 text-emerald-700 ring-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:ring-emerald-800/60",
+  low:    "bg-brand-50 text-brand-700 ring-brand-200 dark:bg-brand-950/40 dark:text-brand-300 dark:ring-brand-800/60",
   medium: "bg-amber-50 text-amber-700 ring-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:ring-amber-800/60",
   high:   "bg-rose-50 text-rose-700 ring-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:ring-rose-800/60",
 };
@@ -32,7 +33,7 @@ const RISK_PILL: Record<string, string> = {
   />
 
   <div class="mb-8 flex flex-wrap items-center gap-2 text-sm">
-    <span class="text-slate-500 dark:text-slate-400">Filter by risk:</span>
+    <span class="text-muted-foreground">Filter by risk:</span>
     {(["low", "medium", "high"] as const).map((risk) => (
       <span class:list={["rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset", RISK_PILL[risk] ?? ""]}>
         {risk} ({counts[risk] ?? 0})
@@ -46,9 +47,9 @@ const RISK_PILL: Record<string, string> = {
     ))}
   </div>
 
-  <p class="mt-12 text-sm text-slate-500 dark:text-slate-400">
+  <p class="mt-12 text-sm text-muted-foreground">
     Skills are discovered at runtime from <code>app/src/main/assets/skills/</code>.
     Adding a new skill is as simple as dropping a new <code>SKILL.md</code> folder
-    in. See the <a href="https://touchpilot.github.io/touchpilot-docs/skills/" class="text-brand-700 underline-offset-2 hover:underline dark:text-brand-300">authoring guide</a>.
+    in. See the <a href="https://touchpilot.github.io/touchpilot-docs/skills/" class="text-primary underline-offset-2 hover:underline">authoring guide</a>.
   </p>
 </Base>

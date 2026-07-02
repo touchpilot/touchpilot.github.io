@@ -1,52 +1,70 @@
 ---
 const year = new Date().getFullYear();
 ---
-<footer class="border-t border-slate-200/60 py-12 dark:border-slate-800/60">
-  <div class="mx-auto grid w-full max-w-6xl gap-10 px-6 sm:grid-cols-2 md:grid-cols-4">
-    <div class="md:col-span-2">
-      <div class="flex items-center gap-2 font-semibold tracking-tight">
-        <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white">
-          <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5" aria-hidden="true">
-            <path d="M5 5c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5Z" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M9 12h6M9 8h6M9 16h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+<footer id="footer" class="mt-16">
+  <hr class="w-11/12 mx-auto border-border" />
+
+  <section class="container py-20 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8">
+    <div class="col-span-full xl:col-span-2">
+      <a href="/" class="flex items-center gap-2 text-xl font-bold tracking-tight">
+        <span class="inline-flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-primary text-primary-foreground shadow-sm">
+          <img src="/logo.png" alt="" class="h-6 w-6" />
         </span>
-        <span>TouchPilot</span>
-      </div>
-      <p class="mt-3 max-w-md text-sm text-slate-600 dark:text-slate-400">
+        TouchPilot
+      </a>
+      <p class="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
         Local-first Android AI agent runtime for safe, observable phone control.
         Open source under the MIT license.
       </p>
+
+      <div class="mt-5 flex items-center gap-3">
+        <a href="https://github.com/touchpilot/touchpilot" aria-label="GitHub" class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-input bg-background transition-colors hover:bg-accent hover:text-accent-foreground">
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.18c-3.2.7-3.87-1.36-3.87-1.36-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18.91-.25 1.89-.38 2.86-.39.97.01 1.95.13 2.86.39 2.18-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.75.11 3.04.73.8 1.18 1.83 1.18 3.09 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.13v3.16c0 .31.21.68.79.56C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5Z"/>
+          </svg>
+        </a>
+        <a href="https://discord.gg/TvXwsNbx" aria-label="Discord" class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-input bg-background transition-colors hover:bg-accent hover:text-accent-foreground">
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true">
+            <path d="M20.32 4.37A19.79 19.79 0 0 0 16.4 3.1a.07.07 0 0 0-.08.04c-.18.32-.39.74-.53 1.07a18.27 18.27 0 0 0-5.58 0 10.7 10.7 0 0 0-.54-1.07.08.08 0 0 0-.08-.04 19.74 19.74 0 0 0-3.92 1.27.07.07 0 0 0-.03.03C2.18 9.46 1.5 14.43 1.88 19.36a.08.08 0 0 0 .03.06 19.9 19.9 0 0 0 5.99 3.03.08.08 0 0 0 .08-.03c.46-.63.87-1.3 1.23-2a.08.08 0 0 0-.04-.11 13.07 13.07 0 0 1-1.87-.89.08.08 0 0 1-.01-.13c.13-.1.25-.2.37-.3a.08.08 0 0 1 .08-.01c3.93 1.79 8.18 1.79 12.06 0a.08.08 0 0 1 .09.01l.37.3a.08.08 0 0 1-.01.13 12.21 12.21 0 0 1-1.87.89.08.08 0 0 0-.04.11c.37.7.78 1.37 1.23 2a.08.08 0 0 0 .08.03 19.83 19.83 0 0 0 6-3.03.08.08 0 0 0 .03-.06c.46-5.74-.74-10.66-3.13-14.96a.06.06 0 0 0-.03-.04ZM8.68 16.34c-1.18 0-2.16-1.08-2.16-2.41 0-1.34.96-2.42 2.16-2.42 1.21 0 2.18 1.09 2.16 2.42 0 1.33-.96 2.41-2.16 2.41Zm6.65 0c-1.18 0-2.16-1.08-2.16-2.41 0-1.34.96-2.42 2.16-2.42 1.21 0 2.18 1.09 2.16 2.42 0 1.33-.95 2.41-2.16 2.41Z"/>
+          </svg>
+        </a>
+      </div>
     </div>
 
-    <div>
-      <h3 class="text-sm font-semibold">Product</h3>
-      <ul class="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-400">
-        <li><a href="/features/" class="hover:text-slate-900 dark:hover:text-white">Features</a></li>
-        <li><a href="/skills/" class="hover:text-slate-900 dark:hover:text-white">Skills</a></li>
-        <li><a href="/install/" class="hover:text-slate-900 dark:hover:text-white">Install</a></li>
-        <li><a href="/roadmap/" class="hover:text-slate-900 dark:hover:text-white">Roadmap</a></li>
-      </ul>
+    <div class="flex flex-col gap-2">
+      <h3 class="text-lg font-bold">Product</h3>
+      <div><a href="/features/" class="text-muted-foreground opacity-60 transition-opacity hover:opacity-100">Features</a></div>
+      <div><a href="/skills/" class="text-muted-foreground opacity-60 transition-opacity hover:opacity-100">Skills</a></div>
+      <div><a href="/install/" class="text-muted-foreground opacity-60 transition-opacity hover:opacity-100">Install</a></div>
+      <div><a href="/roadmap/" class="text-muted-foreground opacity-60 transition-opacity hover:opacity-100">Roadmap</a></div>
     </div>
 
-    <div>
-      <h3 class="text-sm font-semibold">Resources</h3>
-      <ul class="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-400">
-        <li><a href="https://touchpilot.github.io/touchpilot-docs/" class="hover:text-slate-900 dark:hover:text-white">Documentation</a></li>
-        <li><a href="https://github.com/touchpilot/touchpilot" class="hover:text-slate-900 dark:hover:text-white">Source on GitHub</a></li>
-        <li><a href="https://discord.gg/TvXwsNbx" class="hover:text-slate-900 dark:hover:text-white">Discord</a></li>
-        <li><a href="/safety/" class="hover:text-slate-900 dark:hover:text-white">Safety model</a></li>
-      </ul>
+    <div class="flex flex-col gap-2">
+      <h3 class="text-lg font-bold">Resources</h3>
+      <div><a href="https://touchpilot.github.io/touchpilot-docs/" class="text-muted-foreground opacity-60 transition-opacity hover:opacity-100">Documentation</a></div>
+      <div><a href="/safety/" class="text-muted-foreground opacity-60 transition-opacity hover:opacity-100">Safety model</a></div>
+      <div><a href="/community/" class="text-muted-foreground opacity-60 transition-opacity hover:opacity-100">Community</a></div>
+      <div><a href="https://discord.gg/TvXwsNbx" class="text-muted-foreground opacity-60 transition-opacity hover:opacity-100">Discord</a></div>
     </div>
-  </div>
 
-  <div class="mx-auto mt-10 flex w-full max-w-6xl flex-col items-start justify-between gap-3 px-6 text-sm text-slate-500 sm:flex-row sm:items-center dark:text-slate-400">
-    <p>© {year} TouchPilot contributors. Released under the MIT License.</p>
-    <p>
-      Built with
-      <a href="https://astro.build" class="underline-offset-2 hover:underline">Astro</a>
-      · Hosted on
-      <a href="https://pages.cloudflare.com" class="underline-offset-2 hover:underline">Cloudflare Pages</a>
-    </p>
-  </div>
+    <div class="flex flex-col gap-2">
+      <h3 class="text-lg font-bold">Sponsors</h3>
+      <a href="https://github.com/subnet-74" class="inline-flex items-center gap-2 text-muted-foreground opacity-80 transition-opacity hover:opacity-100">
+        <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-foreground text-background font-bold text-[10px]">S74</span>
+        <span class="font-semibold">Subnet 74</span>
+      </a>
+      <a href="https://github.com/touchpilot/touchpilot/graphs/contributors" class="text-muted-foreground opacity-60 transition-opacity hover:opacity-100">All contributors</a>
+    </div>
+  </section>
+
+  <section class="container pb-14 text-center">
+    <h3 class="text-sm text-muted-foreground">
+      &copy; {year} TouchPilot contributors · Released under the
+      <a href="https://github.com/touchpilot/touchpilot/blob/main/LICENSE" class="text-primary transition-all border-primary hover:border-b-2">MIT License</a>
+      · Built with
+      <a href="https://astro.build" class="text-primary transition-all border-primary hover:border-b-2">Astro</a>
+      · Sponsored by
+      <a href="https://github.com/subnet-74" class="font-semibold text-primary transition-all border-primary hover:border-b-2">Subnet 74</a>
+    </h3>
+  </section>
 </footer>
