@@ -6,129 +6,46 @@ import Button from "@components/ui/Button.astro";
 import Card from "@components/ui/Card.astro";
 import Badge from "@components/ui/Badge.astro";
 
-const features = [
+const pillars = [
   {
-    title: "Responsive design",
-    description: "Works on any phone, tablet, or emulator. Built for Android 8.0+ with adaptive layouts.",
-    icon: "M3 5h18v10H3zM8 19h8M12 15v4",
+    title: "See",
+    description: "Observe UI semantics via AccessibilityService",
+    icon: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z",
   },
   {
-    title: "Intuitive interface",
-    description: "Plain-language chat. The agent reads your screen, proposes a typed tool, and waits for your approval.",
+    title: "Act",
+    description: "Tap, type, scroll, open apps, and more",
+    icon: "M9 11.24V7.5a3.5 3.5 0 1 1 7 0v3.74M5 9h14l1 12H4l1-12z",
+  },
+  {
+    title: "Safe",
+    description: "Permissioned tools with risk levels",
+    icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+  },
+  {
+    title: "Observable",
+    description: "Every decision and action is logged",
+    icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8",
+  },
+  {
+    title: "Chat",
+    description: "OpenAI-compatible models today, local models later",
     icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
-  },
-  {
-    title: "Local-first AI",
-    description: "A deterministic router handles simple actions offline. No API key, no network, no telemetry by default.",
-    icon: "M12 3v9m0 0 3-3m-3 3-3-3M5 21h14M7 17h10v4H7Z",
-  },
-  {
-    title: "Readable skills",
-    description: "Every capability lives in a plain Markdown file you can read, edit, and audit.",
-    icon: "M4 5h12a2 2 0 0 1 2 2v12l-4-4H6a2 2 0 0 1-2-2V5ZM4 5v14",
-  },
-  {
-    title: "Risk-aware approvals",
-    description: "Every medium- and high-risk action shows up in chat for your explicit approval before it runs.",
-    icon: "M12 3 4 6v6c0 4.4 3 8.4 8 9 5-.6 8-4.6 8-9V6l-8-3Z M9 12l2 2 4-4",
-  },
-  {
-    title: "Full audit log",
-    description: "Every model decision and every tool execution is persisted locally and exportable.",
-    icon: "M5 4h11l3 3v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1ZM8 12h8M8 16h5",
   },
 ];
 
-const featureBadges = [
-  "Dark/Light theme",
-  "Markdown skills",
-  "10 bundled skills",
-  "26+ native tools",
-  "Local-first",
-  "Risk levels",
-  "Audit log",
-  "Approvals",
-  "MCP compatible",
-  "MIT licensed",
+const traits = [
+  { icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5", title: "Modular", desc: "Pluggable tools, skills, and providers" },
+  { icon: "M9 12l2 2 4-4M12 3 4 6v6c0 4.4 3 8.4 8 9 5-.6 8-4.6 8-9V6l-8-3z", title: "Secure by design", desc: "Approvals, risk levels, and policy controls" },
+  { icon: "M2 4h20v16H2zM6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 16h12", title: "Local first", desc: "Logs, skills, and sessions stored on-device" },
+  { icon: "M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09zM12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z", title: "Early stage", desc: "MVP: AccessibilityService spike and agent runtime" },
 ];
 
 const howItWorks = [
-  {
-    title: "Sideload the APK",
-    description: "Download TouchPilot from GitHub Releases. Works on real phones and emulators — no Play Store needed.",
-    icon: "M12 4v12m0 0-5-5m5 5 5-5M5 20h14",
-  },
-  {
-    title: "Grant Accessibility",
-    description: "TouchPilot uses the standard Accessibility service to read your screen and perform taps. No root, no overlay hacks.",
-    icon: "M9 12l2 2 4-4M12 3 4 6v6c0 4.4 3 8.4 8 9 5-.6 8-4.6 8-9V6l-8-3Z",
-  },
-  {
-    title: "Chat your task",
-    description: "Type what you want — open Wi-Fi settings, draft a text, change volume. The agent proposes a typed tool call.",
-    icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
-  },
-  {
-    title: "Approve what matters",
-    description: "LOW tools run silent. MEDIUM asks once per session. HIGH always asks. You see every argument before it fires.",
-    icon: "M9 12l2 2 4-4M21 12c0 5-3.5 7.5-8.5 9-5-1.5-9-4-9-9V5l9-3 9 3z",
-  },
-];
-
-const sponsors = [
-  { icon: "M9 12l2 2 4-4M12 3 4 6v6c0 4.4 3 8.4 8 9 5-.6 8-4.6 8-9V6l-8-3Z", name: "Subnet 74", tagline: "Privacy-first AI sponsor" },
-];
-
-const stats = [
-  { quantity: "10",  description: "Bundled skills" },
-  { quantity: "26+", description: "Native tools" },
-  { quantity: "4",   description: "Safety layers" },
-  { quantity: "0",   description: "Telemetry by default" },
-];
-
-const testimonials = [
-  {
-    avatar: "/logo.png",
-    name: "tmimmanuel",
-    userName: "@tmimmanuel · Maintainer",
-    comment: "TouchPilot is the missing layer between an LLM and a real device. You can actually read what it does.",
-  },
-  {
-    avatar: "/logo.png",
-    name: "Subnet 74",
-    userName: "@subnet-74 · Sponsor",
-    comment: "We're backing TouchPilot because the future of personal AI has to be local-first and auditable.",
-  },
-  {
-    avatar: "/logo.png",
-    name: "Open-source community",
-    userName: "@contributors",
-    comment: "Skills are Markdown files in the repo. I added one over coffee and the agent picked it up the next launch.",
-  },
-];
-
-const pricing = [
-  {
-    title: "Free",
-    popular: false,
-    price: 0,
-    description: "Everything TouchPilot is today. Open source, MIT licensed.",
-    benefits: ["All 10 bundled skills", "26+ native tools", "Full audit log", "Risk-aware approvals", "Community support"],
-  },
-  {
-    title: "Sponsor",
-    popular: true,
-    price: 0,
-    description: "Sponsor TouchPilot via Subnet 74 to fund safety work and platform hardening.",
-    benefits: ["Everything in Free", "Fund safety & policy v2", "Sponsor-only roadmap calls", "Logo in the README", "Direct line to maintainers"],
-  },
-  {
-    title: "Enterprise",
-    popular: false,
-    price: 0,
-    description: "Self-host, ship your own fork, or contract work. Let's talk.",
-    benefits: ["Custom skills", "Brand variants", "Priority fixes", "Private advisory channel", "On-call consulting"],
-  },
+  { n: "1", title: "Sideload the APK", body: "Download TouchPilot from GitHub Releases. No Play Store needed. Works on real phones and emulators." },
+  { n: "2", title: "Grant Accessibility", body: "Standard Accessibility service — how the agent reads your screen and performs taps. No root, no overlay hacks." },
+  { n: "3", title: "Chat your task", body: "Open Wi-Fi settings, draft a text, change volume. The agent proposes a typed tool call." },
+  { n: "4", title: "Approve what matters", body: "LOW tools run silent. MEDIUM asks once per session. HIGH always asks. You see every argument." },
 ];
 ---
 <Base
@@ -139,430 +56,225 @@ const pricing = [
   <Footer slot="footer" />
 
   <!-- Hero -->
-  <section class="container grid place-items-center gap-10 py-20 md:py-32 lg:grid-cols-2">
-    <div class="space-y-6 text-center lg:text-start">
-      <div class="flex justify-center lg:justify-start">
-        <Badge variant="secondary" class="px-3 py-1 text-xs">
-          <span class="mr-1.5 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
-          1.0 Release Candidate · Live now
-        </Badge>
+  <section class="container py-20 md:py-28">
+    <div class="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
+      <!-- Left: text -->
+      <div class="space-y-6 text-center lg:text-left">
+        <div class="flex justify-center lg:justify-start">
+          <Badge variant="secondary" class="px-3 py-1 text-xs">
+            <span class="mr-1.5 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+            1.0 Release Candidate · Live now
+          </Badge>
+        </div>
+
+        <div class="flex items-center justify-center gap-4 lg:justify-start">
+          <img src="/app-icon.png" alt="TouchPilot" class="h-16 w-16 rounded-2xl shadow-lg shadow-primary/20 ring-1 ring-primary/20" />
+          <h1 class="text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
+            <span class="gradient-text">TouchPilot</span>
+          </h1>
+        </div>
+
+        <p class="text-2xl font-medium leading-snug md:text-3xl">
+          Android-native AI agent runtime
+          <br />
+          for <span class="gradient-text font-semibold">safe, observable</span> phone control.
+        </p>
+
+        <p class="max-w-xl text-lg leading-relaxed text-muted-foreground mx-auto lg:mx-0">
+          TouchPilot lets AI agents perceive and operate Android devices
+          through explicit, permissioned, and inspectable tools.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+          <Button size="lg" href="/install/">
+            <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5" aria-hidden="true">
+              <path d="M12 4v12m0 0-5-5m5 5 5-5M5 20h14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Download APK
+          </Button>
+          <Button size="lg" variant="outline" href="https://github.com/touchpilot/touchpilot">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+              <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.18c-3.2.7-3.87-1.36-3.87-1.36-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18.91-.25 1.89-.38 2.86-.39.97.01 1.95.13 2.86.39 2.18-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.75.11 3.04.73.8 1.18 1.83 1.18 3.09 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.13v3.16c0 .31.21.68.79.56C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5Z"/>
+            </svg>
+            View on GitHub
+          </Button>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 pt-2 text-xs text-muted-foreground lg:justify-start">
+          <span class="inline-flex items-center gap-1.5">
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
+            Android 8.0+
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
+            MIT licensed
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
+            No account
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
+            No telemetry
+          </span>
+        </div>
       </div>
 
-      <main class="text-5xl font-bold md:text-6xl">
-        <h1 class="inline">
-          <span class="gradient-text">TouchPilot</span>
-        </h1>{" "}
-        — a local-first AI agent
-        <h2 class="inline mt-2 block">
-          <span class="gradient-text">for your Android phone.</span>
-        </h2>
-      </main>
-
-      <p class="text-xl text-muted-foreground md:w-10/12 mx-auto lg:mx-0">
-        A typed, permissioned, on-device agent runtime. Every action is a tool
-        you can read. Every sensitive step asks first.
-      </p>
-
-      <div class="flex flex-col items-center gap-3 md:flex-row md:justify-start lg:items-start">
-        <Button size="lg" href="/install/">
-          <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5" aria-hidden="true">
-            <path d="M12 4v12m0 0-5-5m5 5 5-5M5 20h14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Download APK
-        </Button>
-
-        <Button size="lg" variant="outline" href="https://touchpilot.github.io/touchpilot-docs/">
-          <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5" aria-hidden="true">
-            <path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Read the docs
-        </Button>
-      </div>
-
-      <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 pt-2 text-xs text-muted-foreground lg:justify-start">
-        <span class="inline-flex items-center gap-1.5">
-          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
-          Android 8.0+
-        </span>
-        <span class="inline-flex items-center gap-1.5">
-          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
-          MIT licensed
-        </span>
-        <span class="inline-flex items-center gap-1.5">
-          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
-          No account
-        </span>
-        <span class="inline-flex items-center gap-1.5">
-          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
-          No telemetry
-        </span>
+      <!-- Right: phone mockup -->
+      <div class="relative z-10 flex justify-center lg:justify-end">
+        <div class="absolute -inset-8 -z-10 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-primary/10 blur-3xl"></div>
+        <img
+          src="/phone-chat.png"
+          alt="TouchPilot chat interface on Android"
+          class="w-full max-w-md rounded-[2.5rem] shadow-2xl shadow-primary/20 ring-1 ring-primary/10"
+        />
       </div>
     </div>
-
-    <!-- Hero cards: visual showcase -->
-    <div class="z-10">
-      <div class="relative hidden h-[500px] w-[700px] lg:flex">
-        <!-- Terminal mockup card -->
-        <div class="absolute right-[20px] top-4 w-80 overflow-hidden rounded-lg border bg-card text-card-foreground shadow-xl shadow-primary/10">
-          <div class="flex items-center gap-1.5 border-b bg-muted/50 px-4 py-2.5">
-            <span class="h-2.5 w-2.5 rounded-full bg-rose-500/80"></span>
-            <span class="h-2.5 w-2.5 rounded-full bg-amber-500/80"></span>
-            <span class="h-2.5 w-2.5 rounded-full bg-primary/80"></span>
-            <span class="ml-3 font-mono text-xs text-muted-foreground">touchpilot · chat</span>
-          </div>
-          <div class="space-y-2.5 p-4 font-mono text-sm">
-            <div class="flex gap-2.5"><span class="text-primary">›</span><span class="text-card-foreground">open wifi settings</span></div>
-            <div class="flex gap-2.5"><span class="text-muted-foreground">·</span><span class="text-muted-foreground">observing screen…</span></div>
-            <div class="flex gap-2.5"><span class="text-muted-foreground">·</span><span class="text-muted-foreground">tapping Wi-Fi &amp; internet</span></div>
-            <div class="flex gap-2.5"><span class="text-primary">›</span><span class="text-card-foreground">connect to Home-5G</span></div>
-            <div class="flex gap-2.5"><span class="text-muted-foreground">·</span><span class="text-amber-500">password required…</span></div>
-            <div class="mt-2 flex items-center gap-2 border-t pt-2 text-muted-foreground">
-              <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
-              <span>TouchPilot is typing…</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Skill badge card -->
-        <div class="absolute left-[50px] top-[200px] w-72 overflow-hidden rounded-lg border bg-card text-card-foreground shadow-xl shadow-primary/10">
-          <div class="space-y-1 p-5">
-            <div class="flex items-center justify-between">
-              <p class="font-mono text-xs text-primary">Skill · LOW</p>
-              <Badge variant="secondary" class="text-xs">Active</Badge>
-            </div>
-            <p class="text-base font-semibold">App Launch</p>
-            <p class="text-xs text-muted-foreground">Open installed apps by name or package and confirm the requested app is foreground.</p>
-            <div class="mt-3 flex items-center gap-2 border-t pt-3 text-xs text-muted-foreground">
-              <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary/20 text-primary">✓</span>
-              <span>5 allowed tools</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Stats card -->
-        <div class="absolute bottom-[60px] right-[20px] w-72 overflow-hidden rounded-lg border bg-card text-card-foreground shadow-xl shadow-primary/10">
-          <div class="p-5">
-            <p class="font-mono text-xs text-primary">Run summary</p>
-            <div class="mt-2 grid grid-cols-3 gap-2 text-center">
-              <div>
-                <p class="text-2xl font-bold text-primary">6</p>
-                <p class="text-[10px] uppercase tracking-wider text-muted-foreground">Steps</p>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-primary">0</p>
-                <p class="text-[10px] uppercase tracking-wider text-muted-foreground">Failed</p>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-primary">2</p>
-                <p class="text-[10px] uppercase tracking-wider text-muted-foreground">Approvals</p>
-              </div>
-            </div>
-            <button class="mt-4 w-full rounded-md bg-primary px-3 py-2 text-xs font-medium text-primary-foreground hover:bg-primary/90">
-              View run details
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile fallback: simplified visual -->
-      <div class="lg:hidden">
-        <div class="overflow-hidden rounded-lg border bg-card text-card-foreground shadow-xl">
-          <div class="flex items-center gap-1.5 border-b bg-muted/50 px-4 py-2.5">
-            <span class="h-2.5 w-2.5 rounded-full bg-rose-500/80"></span>
-            <span class="h-2.5 w-2.5 rounded-full bg-amber-500/80"></span>
-            <span class="h-2.5 w-2.5 rounded-full bg-primary/80"></span>
-            <span class="ml-3 font-mono text-xs text-muted-foreground">touchpilot · chat</span>
-          </div>
-          <div class="space-y-2 p-4 font-mono text-sm">
-            <div class="flex gap-2"><span class="text-primary">›</span><span>open wifi settings</span></div>
-            <div class="flex gap-2"><span class="text-muted-foreground">·</span><span class="text-muted-foreground">observing screen…</span></div>
-            <div class="flex gap-2"><span class="text-primary">›</span><span>connect to Home-5G</span></div>
-            <div class="flex gap-2"><span class="text-amber-500">·</span><span class="text-amber-500">password required…</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Hero shadow effect -->
-    <div class="shadow"></div>
   </section>
 
-  <!-- Sponsors / Investors -->
-  <section id="sponsors" class="container pt-12 sm:py-16">
-    <h2 class="text-center text-md font-bold text-primary lg:text-xl">Investors and sponsors</h2>
-    <div class="mt-6 flex flex-wrap items-center justify-center gap-6 md:gap-10">
-      {sponsors.map(({ icon, name, tagline }) => (
-        <div class="flex items-center gap-3 text-muted-foreground/80">
-          <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15 text-primary">
-            <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5" aria-hidden="true">
-              <path d={icon} stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Five pillars (See / Act / Safe / Observable / Chat) -->
+  <section class="container py-16">
+    <div class="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3 lg:grid-cols-5">
+      {pillars.map((p) => (
+        <div class="flex flex-col items-center text-center">
+          <span class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary/15 text-primary ring-1 ring-primary/20">
+            <svg viewBox="0 0 24 24" fill="none" class="h-7 w-7" aria-hidden="true">
+              <path d={p.icon} stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
-          <div class="text-left">
-            <h3 class="text-base font-bold text-foreground">{name}</h3>
-            <p class="text-xs text-muted-foreground">{tagline}</p>
-          </div>
+          <h3 class="mt-4 text-base font-semibold">{p.title}</h3>
+          <p class="mt-1 text-sm leading-relaxed text-muted-foreground">{p.description}</p>
         </div>
       ))}
     </div>
   </section>
 
-  <!-- About / Statistics -->
-  <section id="about" class="container py-24 sm:py-32">
-    <div class="rounded-lg border bg-muted/50 py-12">
-      <div class="px-6 flex flex-col-reverse gap-8 md:flex-row md:gap-12">
-        <img
-          src="/hero.png"
-          alt="TouchPilot"
-          class="w-[300px] rounded-lg object-contain md:w-[400px]"
-        />
-        <div class="flex flex-col justify-between">
-          <div class="pb-6">
-            <h2 class="text-3xl font-bold md:text-4xl">
-              <span class="gradient-text">About</span> TouchPilot
-            </h2>
-            <p class="mt-4 text-xl text-muted-foreground">
-              TouchPilot is the missing layer between a language model and a
-              real device. It reads your screen through AccessibilityService,
-              proposes typed tool calls, and refuses to take a sensitive action
-              without your tap. Every decision is logged. Every skill is a
-              Markdown file in your repo.
-            </p>
+  <!-- Built for developers + phone mockup -->
+  <section class="container py-16">
+    <div class="grid items-center gap-10 rounded-3xl border bg-card p-8 shadow-sm md:p-12 lg:grid-cols-2">
+      <!-- Left: terminal -->
+      <div class="space-y-4">
+        <p class="text-sm font-bold uppercase tracking-wider text-primary">Built for developers</p>
+        <div class="overflow-hidden rounded-xl border bg-foreground font-mono text-sm shadow-lg">
+          <div class="flex items-center gap-1.5 border-b border-background/20 bg-foreground px-4 py-2.5">
+            <span class="h-2.5 w-2.5 rounded-full bg-rose-500/80"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-amber-500/80"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-primary/80"></span>
+            <span class="ml-3 text-xs text-background/60">touchpilot</span>
           </div>
+          <pre class="space-y-2 p-5 text-background"><code><span class="text-primary">#</span> Build debug APK
+<span class="text-muted-foreground">$</span> ./gradlew assembleDebug
 
-          <div class="grid grid-cols-2 gap-8 lg:grid-cols-4">
-            {stats.map(({ quantity, description }) => (
-              <div class="space-y-2 text-center">
-                <h2 class="text-3xl font-bold sm:text-4xl gradient-text">{quantity}</h2>
-                <p class="text-xl text-muted-foreground">{description}</p>
-              </div>
-            ))}
-          </div>
+<span class="text-primary">#</span> Build release APK
+<span class="text-muted-foreground">$</span> ./gradlew assembleRelease</code></pre>
         </div>
+        <ul class="space-y-2 pt-2">
+          {[
+            "Runs natively on Android",
+            "OpenAI-compatible providers",
+            "Local inference (ExecuTorch, llama.cpp) coming",
+            "Full audit logs and approvals",
+          ].map((item) => (
+            <li class="flex items-start gap-2 text-sm">
+              <svg viewBox="0 0 24 24" class="mt-0.5 h-4 w-4 flex-none text-primary" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Right: phone mockup -->
+      <div class="relative flex justify-center">
+        <div class="absolute -inset-6 -z-10 rounded-full bg-primary/10 blur-3xl"></div>
+        <img
+          src="/phone-chat.png"
+          alt="TouchPilot on device"
+          class="w-full max-w-xs rounded-[2rem] shadow-2xl shadow-primary/10 ring-1 ring-border"
+        />
       </div>
     </div>
   </section>
 
   <!-- How It Works -->
-  <section id="how-it-works" class="container py-24 text-center sm:py-32">
+  <section id="how-it-works" class="container py-20 text-center sm:py-24">
+    <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">How it works</p>
     <h2 class="text-3xl font-bold md:text-4xl">
-      How It{" "}
-      <span class="gradient-text">Works</span>
-      <br />
-      Step-by-step guide
+      From a downloaded APK to a working on-device agent in
+      <span class="gradient-text">under five minutes</span>.
     </h2>
-    <p class="mx-auto mt-4 mb-8 text-xl text-muted-foreground md:w-3/4">
-      From a downloaded APK to a working on-device agent in under five
-      minutes. Every step is reversible.
+    <p class="mx-auto mt-4 mb-12 max-w-2xl text-lg text-muted-foreground">
+      Every step is reversible. No root, no Play Store, no account.
     </p>
 
-    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-      {howItWorks.map(({ icon, title, description }) => (
-        <Card class="bg-muted/50 hover:shadow-lg transition-all duration-200">
-          <div class="flex flex-col items-center gap-4 p-6 text-center">
-            <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary">
-              <svg viewBox="0 0 24 24" fill="none" class="h-6 w-6" aria-hidden="true">
-                <path d={icon} stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            <h3 class="text-lg font-semibold">{title}</h3>
-            <p class="text-sm text-muted-foreground">{description}</p>
-          </div>
-        </Card>
-      ))}
-    </div>
-  </section>
-
-  <!-- Features -->
-  <section id="features" class="container space-y-8 py-24 sm:py-32">
-    <h2 class="text-center text-3xl font-bold md:text-4xl">
-      Many{" "}
-      <span class="gradient-text">Great Features</span>
-    </h2>
-
-    <div class="flex flex-wrap justify-center gap-4">
-      {featureBadges.map((feature) => (
-        <Badge variant="secondary" class="text-sm">{feature}</Badge>
-      ))}
-    </div>
-
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      {features.map(({ title, description, icon }) => (
-        <Card class="hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {howItWorks.map(({ n, title, body }) => (
+        <Card class="bg-muted/50 text-left transition-all hover:-translate-y-1 hover:shadow-lg">
           <div class="space-y-3 p-6">
-            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
-              <svg viewBox="0 0 24 24" fill="none" class="h-6 w-6" aria-hidden="true">
-                <path d={icon} stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary text-base font-bold text-primary-foreground">{n}</span>
             <h3 class="text-lg font-semibold">{title}</h3>
-            <p class="text-sm text-muted-foreground">{description}</p>
+            <p class="text-sm leading-relaxed text-muted-foreground">{body}</p>
           </div>
         </Card>
       ))}
     </div>
   </section>
 
-  <!-- Services: Why TouchPilot -->
-  <section id="services" class="container py-24 sm:py-32">
-    <div class="grid place-items-center gap-8 lg:grid-cols-[1fr,1fr]">
-      <div>
-        <h2 class="text-3xl font-bold md:text-4xl">
-          <span class="gradient-text">Client-Centric</span>{" "}
-          Design
-        </h2>
-        <p class="mt-4 mb-8 text-xl text-muted-foreground">
-          Your phone is the interface, not a remote API. TouchPilot reads what
-          you see, asks before it acts, and writes everything to a log you can
-          export.
-        </p>
+  <!-- Image gallery row: 3 phone mockups -->
+  <section class="container py-12">
+    <div class="grid gap-6 md:grid-cols-3">
+      <div class="relative overflow-hidden rounded-2xl border bg-card p-4 shadow-sm">
+        <img src="/phone-chat.png" alt="TouchPilot chat" class="w-full rounded-xl" />
+        <p class="mt-3 text-center text-sm font-medium">Chat with the agent</p>
+      </div>
+      <div class="relative overflow-hidden rounded-2xl border bg-card p-4 shadow-sm">
+        <img src="/phone-chat.png" alt="TouchPilot tool picker" class="w-full rounded-xl" />
+        <p class="mt-3 text-center text-sm font-medium">Inspect every tool</p>
+      </div>
+      <div class="relative overflow-hidden rounded-2xl border bg-card p-4 shadow-sm">
+        <img src="/phone-chat.png" alt="TouchPilot audit log" class="w-full rounded-xl" />
+        <p class="mt-3 text-center text-sm font-medium">Read every action</p>
+      </div>
+    </div>
+  </section>
 
-        <div class="flex flex-col gap-4">
-          {[
-            { icon: "M12 3v9m0 0 3-3m-3 3-3-3M5 21h14M7 17h10v4H7Z", title: "Local-first by default", desc: "A deterministic router handles simple actions offline. No API key. No telemetry." },
-            { icon: "M9 12l2 2 4-4M21 12c0 5-3.5 7.5-8.5 9-5-1.5-9-4-9-9V5l9-3 9 3z", title: "Approve the things that matter", desc: "LOW tools run silent. MEDIUM asks once per session. HIGH always asks." },
-            { icon: "M4 5h12a2 2 0 0 1 2 2v12l-4-4H6a2 2 0 0 1-2-2V5ZM4 5v14", title: "Auditable from the source up", desc: "Skills are Markdown files in your repo. The agent reads the same files you do." },
-          ].map(({ icon, title, desc }) => (
-            <Card>
-              <div class="flex items-start gap-4 p-5">
-                <span class="mt-1 rounded-2xl bg-primary/20 p-2 text-primary">
-                  <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5" aria-hidden="true">
-                    <path d={icon} stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-                <div>
-                  <h3 class="text-base font-semibold">{title}</h3>
-                  <p class="mt-1 text-sm text-muted-foreground">{desc}</p>
-                </div>
-              </div>
-            </Card>
-          ))}
+  <!-- Traits row (Modular / Secure / Local / Early stage) -->
+  <section class="container py-16">
+    <div class="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4">
+      {traits.map((t) => (
+        <div class="flex flex-col items-center text-center">
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+            <svg viewBox="0 0 24 24" fill="none" class="h-7 w-7" aria-hidden="true">
+              <path d={t.icon} stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3 class="mt-4 text-base font-semibold">{t.title}</h3>
+          <p class="mt-1 text-sm leading-relaxed text-muted-foreground">{t.desc}</p>
         </div>
-      </div>
-
-      <img
-        src="/hero.png"
-        alt="TouchPilot on device"
-        class="w-[300px] rounded-2xl object-contain md:w-[500px] lg:w-[600px]"
-      />
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section id="cta" class="bg-muted/50 py-16 my-24 sm:my-32">
-    <div class="container grid place-items-center lg:grid-cols-2">
-      <div class="lg:col-start-1">
-        <h2 class="text-3xl font-bold md:text-4xl">
-          All Your
-          <span class="gradient-text"> Ideas &amp; Concepts </span>
-          In One Runtime
-        </h2>
-        <p class="mt-4 mb-8 text-xl text-muted-foreground lg:mb-0">
-          Side-by-side execution and audit. A single place to scope your agent,
-          approve the things that matter, and roll back the things that don't.
-        </p>
-      </div>
-
-      <div class="space-y-4 lg:col-start-2">
-        <Button size="lg" href="/install/" class="w-full md:mr-4 md:w-auto">Request a Demo</Button>
-        <Button size="lg" variant="outline" href="/features/" class="w-full md:w-auto">View all features</Button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section id="testimonials" class="container py-24 sm:py-32">
-    <h2 class="text-3xl font-bold md:text-4xl">
-      Discover Why
-      <span class="gradient-text"> People Love </span>
-      TouchPilot
-    </h2>
-    <p class="pb-8 pt-4 text-xl text-muted-foreground">
-      Maintainers, sponsors, and the open-source community — in their own words.
-    </p>
-
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {testimonials.map(({ avatar, name, userName, comment }) => (
-        <Card class="max-w-md overflow-hidden hover:shadow-lg transition-all duration-200">
-          <div class="flex flex-row items-center gap-4 p-6 pb-2">
-            <div class="inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-primary text-primary-foreground">
-              <img src={avatar} alt="" class="h-8 w-8" />
-            </div>
-            <div class="flex flex-col">
-              <p class="text-base font-semibold">{name}</p>
-              <p class="text-sm text-muted-foreground">{userName}</p>
-            </div>
-          </div>
-          <div class="px-6 pb-6 text-sm text-muted-foreground">
-            {comment}
-          </div>
-        </Card>
       ))}
     </div>
   </section>
 
-  <!-- Pricing -->
-  <section id="pricing" class="container py-24 sm:py-32">
-    <h2 class="text-center text-3xl font-bold md:text-4xl">
-      Get
-      <span class="gradient-text"> Involved</span>
-    </h2>
-    <h3 class="pb-8 pt-4 text-center text-xl text-muted-foreground">
-      TouchPilot is free and open source. Sponsor the work, or contract us
-      for custom builds.
-    </h3>
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      {pricing.map((p) => (
-        <Card class={p.popular ? "shadow-xl shadow-primary/10 ring-1 ring-primary/30" : ""}>
-          <div class="space-y-4 p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-xl font-semibold">{p.title}</h3>
-              {p.popular && <Badge variant="secondary" class="text-xs text-primary">Most popular</Badge>}
-            </div>
-            <div>
-              <span class="text-3xl font-bold">{p.price === 0 ? "Free" : `$${p.price}`}</span>
-              {p.price !== 0 && <span class="text-muted-foreground"> /month</span>}
-            </div>
-            <p class="text-sm text-muted-foreground">{p.description}</p>
-            <Button class="w-full" variant={p.popular ? "default" : "outline"}>
-              {p.title === "Free" ? "Get Started" : p.title === "Sponsor" ? "Sponsor via Subnet 74" : "Contact Us"}
-            </Button>
-            <hr class="m-auto mb-2 w-4/5 border-border" />
-            <div class="space-y-3">
-              {p.benefits.map((benefit) => (
-                <div class="flex items-center gap-2 text-sm">
-                  <svg viewBox="0 0 24 24" class="h-4 w-4 flex-none text-primary" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
-                  <span>{benefit}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Card>
-      ))}
-    </div>
-  </section>
-
-  <!-- Newsletter -->
-  <section id="newsletter">
-    <hr class="w-11/12 mx-auto border-border" />
-    <div class="container py-24 sm:py-32">
-      <h3 class="text-center text-4xl font-bold md:text-5xl">
-        Join Our <span class="gradient-text">Release Notes</span>
-      </h3>
-      <p class="mx-auto mt-4 mb-8 text-center text-xl text-muted-foreground">
-        One short email when a new TouchPilot release ships. No tracking, no
-        marketing.
+  <!-- Final CTA -->
+  <section class="container py-16">
+    <div class="relative overflow-hidden rounded-3xl border bg-gradient-to-br from-primary/10 via-card to-card p-10 text-center md:p-16">
+      <div class="absolute -inset-1 -z-10 bg-gradient-to-br from-primary/20 to-transparent blur-2xl"></div>
+      <img src="/app-icon.png" alt="TouchPilot" class="mx-auto h-20 w-20 rounded-3xl shadow-xl shadow-primary/20 ring-2 ring-primary/30" />
+      <h2 class="mt-6 text-3xl font-bold tracking-tight md:text-4xl">
+        Try <span class="gradient-text">TouchPilot</span> on your phone.
+      </h2>
+      <p class="mx-auto mt-3 max-w-xl text-lg text-muted-foreground">
+        Sideload the APK, grant Accessibility, and start a chat. You'll see
+        every tool the agent runs and approve the ones that matter.
       </p>
-      <form class="mx-auto flex w-full flex-col gap-4 md:w-6/12 md:flex-row md:gap-2 lg:w-4/12">
-        <input
-          type="email"
-          placeholder="you@example.com"
-          aria-label="email"
-          class="flex h-10 w-full rounded-md border border-input bg-muted/50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-        />
-        <Button type="submit">Subscribe</Button>
-      </form>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <Button size="lg" href="/install/">
+          Install guide
+          <svg viewBox="0 0 24 24" fill="none" class="h-4 w-4" aria-hidden="true">
+            <path d="M5 12h14m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </Button>
+        <Button size="lg" variant="outline" href="/features/">View features</Button>
+      </div>
     </div>
-    <hr class="w-11/12 mx-auto border-border" />
   </section>
 </Base>

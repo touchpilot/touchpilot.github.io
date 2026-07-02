@@ -15,16 +15,14 @@ const links = [
 ---
 <header class="sticky border-b-[1px] top-0 z-40 w-full border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
   <nav class="container flex h-14 items-center justify-between px-4">
-    <!-- Brand -->
-    <a href="/" class="ml-2 flex items-center gap-2 text-lg font-bold tracking-tight">
-      <span class="inline-flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-primary text-primary-foreground shadow-sm">
-        <img src="/logo.png" alt="" class="h-6 w-6" />
-      </span>
+    <!-- Brand with app icon -->
+    <a href="/" class="ml-2 flex items-center gap-2.5 text-lg font-bold tracking-tight">
+      <img src="/app-icon.png" alt="TouchPilot" class="h-8 w-8 rounded-lg shadow-sm ring-1 ring-primary/20" />
       <span>TouchPilot</span>
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden gap-2 md:flex" aria-label="Primary">
+    <nav class="hidden gap-1 md:flex" aria-label="Primary">
       {links.map((link) => (
         <a
           href={link.href}
@@ -62,7 +60,7 @@ const links = [
       </a>
     </div>
 
-    <!-- Mobile menu (simplified) -->
+    <!-- Mobile menu -->
     <details class="relative md:hidden">
       <summary class="cursor-pointer list-none rounded-md p-2 hover:bg-accent">
         <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
