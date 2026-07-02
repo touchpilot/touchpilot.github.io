@@ -1,0 +1,74 @@
+---
+// Theme toggle: black (default) / white
+---
+<button
+  type="button"
+  id="theme-toggle"
+  aria-label="Toggle color theme"
+  class="relative inline-flex h-9 w-9 items-center justify-center rounded-md border border-input bg-background transition-colors hover:bg-accent hover:text-accent-foreground"
+>
+  <!-- Sun icon - shown when in dark mode (click to go light) -->
+  <svg
+    id="icon-sun"
+    viewBox="0 0 24 24"
+    class="h-4 w-4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+  </svg>
+  <!-- Moon icon - shown when in light mode (click to go dark) -->
+  <svg
+    id="icon-moon"
+    viewBox="0 0 24 24"
+    class="hidden h-4 w-4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+  </svg>
+</button>
+
+<script is:inline>
+  (() => {
+    const KEY = "touchpilot-theme";
+    const root = document.documentElement;
+    const btn = document.getElementById("theme-toggle");
+    const sun = document.getElementById("icon-sun");
+    const moon = document.getElementById("icon-moon");
+    if (!btn || !sun || !moon) return;
+
+    // Apply theme: "light" -> add .light class. "dark" -> remove it (default).
+    const apply = (theme) => {
+      if (theme === "light") {
+        root.classList.add("light");
+        sun.classList.add("hidden");
+        moon.classList.remove("hidden");
+      } else {
+        root.classList.remove("light");
+        sun.classList.remove("hidden");
+        moon.classList.add("hidden");
+      }
+      localStorage.setItem(KEY, theme);
+    };
+
+    // Restore stored preference
+    const stored = localStorage.getItem(KEY);
+    if (stored === "light") apply("light");
+    else apply("dark");
+
+    btn.addEventListener("click", () => {
+      const next = root.classList.contains("light") ? "dark" : "light";
+      apply(next);
+    });
+  })();
+</script>

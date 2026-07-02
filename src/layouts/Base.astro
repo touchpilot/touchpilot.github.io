@@ -45,15 +45,6 @@ const fullTitle = title === siteName ? title : `${title} · ${siteName}`;
 
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-
-    <script is:inline>
-      // Apply theme before paint to avoid flash
-      const stored = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (stored === "dark" || (!stored && prefersDark)) {
-        document.documentElement.classList.add("dark");
-      }
-    </script>
   </head>
   <body class="min-h-full bg-background text-foreground">
     <a

@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from "./ThemeToggle.astro";
+
 export interface Props {
   current?: "home" | "features" | "skills" | "install" | "safety" | "roadmap" | "community";
 }
@@ -40,6 +42,8 @@ const links = [
     </nav>
 
     <div class="hidden gap-2 md:flex">
+      <ThemeToggle />
+
       <a
         href="https://github.com/touchpilot/touchpilot"
         target="_blank"
@@ -61,35 +65,38 @@ const links = [
     </div>
 
     <!-- Mobile menu -->
-    <details class="relative md:hidden">
-      <summary class="cursor-pointer list-none rounded-md p-2 hover:bg-accent">
-        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/>
-        </svg>
-      </summary>
-      <div class="absolute right-0 top-full mt-2 w-56 rounded-md border border-border bg-popover p-2 shadow-lg">
-        {links.map((link) => (
-          <a
-            href={link.href}
-            class:list={[
-              "block rounded-md px-3 py-2 text-sm transition-colors",
-              current === link.id
-                ? "bg-accent text-accent-foreground"
-                : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-            ]}
-          >
-            {link.label}
-          </a>
-        ))}
-        <div class="mt-2 border-t border-border pt-2">
-          <a
-            href="/install/"
-            class="block rounded-md bg-primary px-3 py-2 text-center text-sm font-medium text-primary-foreground"
-          >
-            Download
-          </a>
+    <div class="flex items-center gap-2 md:hidden">
+      <ThemeToggle />
+      <details class="relative">
+        <summary class="cursor-pointer list-none rounded-md p-2 hover:bg-accent">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <div class="absolute right-0 top-full mt-2 w-56 rounded-md border border-border bg-popover p-2 shadow-lg">
+          {links.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                "block rounded-md px-3 py-2 text-sm transition-colors",
+                current === link.id
+                  ? "bg-accent text-accent-foreground"
+                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+              ]}
+            >
+              {link.label}
+            </a>
+          ))}
+          <div class="mt-2 border-t border-border pt-2">
+            <a
+              href="/install/"
+              class="block rounded-md bg-primary px-3 py-2 text-center text-sm font-medium text-primary-foreground"
+            >
+              Download
+            </a>
+          </div>
         </div>
-      </div>
-    </details>
+      </details>
+    </div>
   </nav>
 </header>

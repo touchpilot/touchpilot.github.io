@@ -3,8 +3,41 @@
 @tailwind utilities;
 
 @layer base {
-  /* Green shadcn theme */
+  /* Black (default) — ambient gradient with green glow */
   :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 6% 6%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 6% 6%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 142.1 70.6% 45.3%;
+    --primary-foreground: 144.9 80.4% 10%;
+
+    --secondary: 240 4% 14%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 4% 14%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 240 4% 14%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 4% 18%;
+    --input: 240 4% 18%;
+    --ring: 142.1 70.6% 45.3%;
+
+    --radius: 0.5rem;
+  }
+
+  /* White theme override */
+  .light {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
 
@@ -32,38 +65,6 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
-
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 20 14.3% 4.1%;
-    --foreground: 0 0% 95%;
-
-    --card: 24 9.8% 10%;
-    --card-foreground: 0 0% 95%;
-
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 95%;
-
-    --primary: 142.1 70.6% 45.3%;
-    --primary-foreground: 144.9 80.4% 10%;
-
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 0 0% 15%;
-    --muted-foreground: 240 5% 64.9%;
-
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 85.7% 97.3%;
-
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 142.4 71.8% 29.2%;
   }
 
   * {
@@ -74,10 +75,27 @@
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
   }
+
+  /* Black default: layered ambient gradient for depth */
   body {
-    @apply bg-background text-foreground antialiased;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, hsl(142 70% 25% / 0.18), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 100% 100%, hsl(142 60% 30% / 0.12), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 0% 100%, hsl(160 60% 25% / 0.10), transparent 70%),
+      linear-gradient(180deg, #050505 0%, #000000 50%, #050505 100%);
+    background-attachment: fixed;
+    color: hsl(var(--foreground));
     font-feature-settings: "cv11", "ss01", "ss03";
   }
+
+  /* Light theme: simple white background */
+  .light body {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, hsl(142 70% 60% / 0.10), transparent 70%),
+      #ffffff;
+    background-attachment: fixed;
+  }
+
   ::selection {
     background: hsl(var(--primary) / 0.2);
     color: hsl(var(--primary));
